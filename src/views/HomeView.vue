@@ -1,18 +1,51 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="container">
+    <div>
+      <img
+        alt="Home Image"
+        src="../assets/images/home.png"
+        class="responsive-image"
+      />
+    </div>
+    <div class="button-container">
+      <BaseButton
+        label="Agendar post"
+        @click="$router.push({ name: 'Agendamento' })"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import BaseButton from "@/components/global/BaseButton.vue";
 
 export default {
   name: "HomeView",
   components: {
-    HelloWorld,
+    BaseButton,
   },
 };
 </script>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.responsive-image {
+  width: 100%;
+  max-width: 408px;
+  max-height: 461px;
+  height: auto;
+  margin-bottom: 4em;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+</style>
