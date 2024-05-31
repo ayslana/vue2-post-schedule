@@ -93,6 +93,10 @@ export default {
 </script>
 
 <style scoped>
+p {
+  color: #828282;
+}
+
 .upload-container {
   display: flex;
   flex-direction: column;

@@ -95,10 +95,11 @@ textarea {
   box-sizing: border-box;
   border-radius: 8px;
   flex-grow: 1;
+  font-family: Poppins, sans-serif;
 }
 
 textarea::placeholder {
-  color: #999;
+  color: #828282;
 }
 
 .icon-container {

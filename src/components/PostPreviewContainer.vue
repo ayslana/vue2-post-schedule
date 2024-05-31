@@ -43,7 +43,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+p {
+  color: #828282;
+}
+
 .content-container {
   display: flex;
   flex-direction: column;
