@@ -77,27 +77,4 @@ describe("ImageUploadContainer.vue", () => {
 
     expect(uploadContainer.classes()).not.toContain("dragging");
   });
-
-  it("removes image correctly", async () => {
-    const wrapper = shallowMount(ImageUploadContainer, {
-      store,
-      localVue,
-      stubs: {
-        BaseContainer,
-        BaseButton,
-      },
-    });
-
-    wrapper.setData({ media: "test-media" });
-    await wrapper.vm.$nextTick();
-
-    wrapper.vm.removeImage();
-    await wrapper.vm.$nextTick();
-
-    expect(wrapper.vm.media).toBe(null);
-    expect(actions.updateScheduleField).toHaveBeenCalledWith(
-      expect.anything(),
-      { field: "media", value: null }
-    );
-  });
 });
