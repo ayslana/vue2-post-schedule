@@ -18,11 +18,18 @@
 
 <script>
 import BaseButton from "@/components/global/BaseButton.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "HomeView",
   components: {
     BaseButton,
+  },
+  methods: {
+    ...mapActions(["fetchSchedulesAndStatuses"]),
+  },
+  mounted() {
+    this.fetchSchedulesAndStatuses();
   },
 };
 </script>
