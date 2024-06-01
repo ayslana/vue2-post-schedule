@@ -47,6 +47,7 @@ export default {
   gap: 16px;
   width: 100%;
   box-sizing: border-box;
+  padding: 16px;
 }
 
 .left-side {
@@ -67,10 +68,6 @@ export default {
   gap: 16px;
 }
 
-.left-side .bottom > * {
-  height: 100%;
-}
-
 .right-side {
   display: grid;
   grid-template-rows: 1fr;
@@ -84,14 +81,6 @@ export default {
 
   .left-side .top {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .left-side .bottom {
-    grid-template-rows: auto 1fr;
-  }
-
-  .right-side {
-    grid-template-rows: auto 1fr;
   }
 }
 </style>
