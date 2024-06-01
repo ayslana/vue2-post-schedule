@@ -3,7 +3,7 @@
     <div
       v-for="(item, index) in items"
       :key="index"
-      :class="['item', { active: item.active, disabled: item.disabled }]"
+      :class="['item', { active: isActive(item.id), disabled: item.disabled }]"
       @click="!item.disabled && toggleItem(index)"
       @mouseover="!item.disabled && hoverItem(index, true)"
       @mouseleave="!item.disabled && hoverItem(index, false)"
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "ItemGroup",
   props: {
@@ -22,12 +24,16 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      hoveredItem: null,
-    };
+  computed: {
+    ...mapGetters(["getSchedule"]),
+    socialNetworkKey() {
+      return this.getSchedule.social_network_key;
+    },
   },
   methods: {
+    isActive(itemId) {
+      return this.socialNetworkKey.includes(itemId);
+    },
     toggleItem(index) {
       this.$emit("toggle", index);
     },
