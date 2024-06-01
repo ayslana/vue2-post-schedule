@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import EmojiTable from "./EmojiTable.vue";
 
 export default {
@@ -42,12 +43,20 @@ export default {
       isEmojiTableVisible: false,
     };
   },
+  computed: {
+    ...mapState({
+      schedule: (state) => state.schedule,
+    }),
+  },
   methods: {
+    ...mapActions(["updateScheduleField"]),
     updateInput(event) {
       this.inputText = event.target.value;
+      this.updateScheduleField({ field: "text", value: this.inputText });
     },
     addEmoji(emoji) {
       this.inputText += emoji;
+      this.updateScheduleField({ field: "text", value: this.inputText });
     },
     toggleEmojiTable() {
       this.isEmojiTableVisible = !this.isEmojiTableVisible;
@@ -59,6 +68,14 @@ export default {
       if (!this.$el.contains(event.target)) {
         this.closeEmojiTable();
       }
+    },
+  },
+  watch: {
+    "schedule.text": {
+      handler(newText) {
+        this.inputText = newText;
+      },
+      immediate: true,
     },
   },
   mounted() {
