@@ -19,10 +19,10 @@ Este projeto é uma aplicação frontend que simula o agendamento de posts em re
 
 ## Estrutura de Pastas
 
-- **assets**: Inclui arquivos de estilização SCSS, além de icons e imagens usados no projeto.
+- **assets**: Inclui arquivos de estilização CSS, além de icons e imagens usados no projeto.
 - **components**: Contém os componentes criados para cada seção, além de componentes reutilizáveis.
-- **views**: Contém as páginas da aplicação, que são automaticamente roteadas pelo Nuxt.js.
-- **public**: Contém arquivos estáticos que são servidos diretamente, como arquivos .json, etc.
+- **views**: Contém as páginas da aplicação, que são roteadas pelo Vue Router.
+- **public**: Contém arquivos estáticos que são servidos diretamente, como os .json fornecidos.
 - **store**: Define a store utilizando o Vuex, que é um gerenciador de estado central para Vue.js.
 
 ## Instalação
