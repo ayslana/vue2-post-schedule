@@ -61,7 +61,7 @@ O aplicativo estará disponível em [http://localhost:8080](http://localhost:808
 
 ## Pontos de Melhorias
 
-Alguns requisitos não foram atendidos devido ao curto período de tempo disponível para a entrega deste desafio. No entanto, pretende-se abordá-los num futuro próximo:
+Alguns requisitos não foram atendidos devido à minha limitada disponibilidade de tempo. No entanto, pretendo abordá-los em um futuro próximo.
 
 - Melhorar a organização do CSS para futuras manutenções.
 - Implementar a persistência da imagem escolhida e a conversão de base64 através de uma classe de serviço.
