@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "social_network_key": [2],
+      "media": "post-image.png",
+      "text": "Texto do post",
+      "actions": "Preview",
+      "status_key": 3,
+      "date": "06/01/2024 às 10:32",
+      "icons": ["linkedin.svg"]
+    },
+    {
+      "id": 2,
+      "social_network_key": [2],
+      "media": "post-image.png",
+      "text": "Texto do post",
+      "status_key": 3,
+      "date": "06/01/2024 às 10:32",
+      "actions": "Preview",
+      "icons": ["instagram.svg", "linkedin.svg"]
+    }
+  ]
+}

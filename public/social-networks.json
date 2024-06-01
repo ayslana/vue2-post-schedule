@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Linkedin",
+      "icon": "linkedin.svg",
+      "disabled": false
+    },
+    {
+      "id": 2,
+      "name": "Instagram",
+      "icon": "instagram.svg",
+      "disabled": false
+    },
+    {
+      "id": 3,
+      "name": "Youtube",
+      "icon": "youtube.svg",
+      "disabled": true
+    },
+    {
+      "id": 4,
+      "name": "Pinterest",
+      "icon": "pinterest.svg",
+      "disabled": true
+    },
+    {
+      "id": 5,
+      "name": "Twitter",
+      "icon": "twitter.svg",
+      "disabled": true
+    },
+    {
+      "id": 6,
+      "name": "Facebook",
+      "icon": "facebook.svg",
+      "disabled": true
+    }
+  ]
+}
