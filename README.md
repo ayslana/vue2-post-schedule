@@ -57,7 +57,7 @@ O aplicativo estará disponível em [http://localhost:8080](http://localhost:808
 - Vue persist para persistir os dados da store do Vuex no local storage.
 - Axios para consumir os dados.
 - Na store, foi optaado por não separar de forma modular, visto que a aplicação em si só se tratava de um único módulo: agendamento.
-- Os estilos foram definidos diretamente dentro dos componentes, utilziando o scoped. 
+- Os estilos foram definidos diretamente dentro dos componentes, utilizando o scoped. 
 
 ## Pontos de Melhorias
 
