@@ -1,10 +1,11 @@
 <template>
   <div class="navbar">
-    <div class="logo" @click="navigateHome">
+    <div class="logo">
       <img
         alt="Logo mLabs"
         src="@/assets/images/mlabs-logo.png"
-        class="logo-img"
+        style="cursor: pointer"
+        @click="$router.push({ name: 'Home' })"
       />
     </div>
     <div class="profile">
@@ -24,11 +25,6 @@ export default {
       userName: "Anselmo Carlos",
     };
   },
-  methods: {
-    navigateHome() {
-      this.$router.push({ name: "Home" });
-    },
-  },
 };
 </script>
 
@@ -43,22 +39,18 @@ export default {
   position: fixed;
   top: 0;
   z-index: 1000;
-  padding: 0 40px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-  cursor: pointer;
-}
-
-.logo-img {
   display: flex;
   align-items: center;
+  padding-left: 40px;
 }
 
 .profile {
   display: flex;
   align-items: center;
+  padding-right: 40px;
   gap: 10px;
 }
 
@@ -66,13 +58,8 @@ export default {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  overflow: hidden;
-}
-
-.profile-pic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  background-color: #ccc;
+  margin-right: 10px;
 }
 
 .profile-name {
