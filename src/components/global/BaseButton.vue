@@ -62,7 +62,7 @@ export default {
   border-radius: 4px;
   border: 1px solid transparent;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700 !important;
   min-width: 184px;
   max-height: 45px;
   cursor: pointer;
@@ -77,17 +77,15 @@ export default {
   color: white;
   border-color: #e0812c;
 }
-
 .btn-primary:hover {
   background-color: #f2984ad8;
 }
 
 .btn-secondary {
   background-color: #2f80ed;
-  border-color: #2f80ed;
   color: white;
+  border-color: #2f80ed;
 }
-
 .btn-secondary:hover {
   background-color: #2f81eddb;
 }
@@ -97,7 +95,6 @@ export default {
   color: #2f80ed;
   border-color: #2f80ed;
 }
-
 .btn-tertiary:hover {
   background-color: #d5e7ff30;
 }
@@ -109,7 +106,6 @@ export default {
   min-width: inherit;
   min-height: inherit;
 }
-
 .btn-text:hover {
   text-decoration: underline;
   background-color: transparent;

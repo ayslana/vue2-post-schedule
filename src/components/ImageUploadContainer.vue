@@ -1,44 +1,43 @@
 <template>
-  <div>
-    <BaseContainer title="Upload de imagem">
-      <div
-        class="upload-container"
-        @dragover.prevent="handleDragOver"
-        @dragleave.prevent="handleDragLeave"
-        @drop.prevent="handleDrop"
-      >
-        <template v-if="imageUrl">
-          <div class="image-preview-container">
-            <img :src="imageUrl" alt="Uploaded Image" class="thumbnail-image" />
-            <button @click="removeImage" class="remove-image-button">×</button>
-          </div>
-        </template>
-        <template v-else>
-          <img
-            src="@/assets/svgs/cloud-upload.svg"
-            alt="Upload Image Placeholder"
-            class="upload-image"
-          />
-          <p>Arraste e solte uma imagem aqui ou clique no botão abaixo</p>
-          <BaseButton
-            label="Pesquisar imagens"
-            @click="handleUploadClick"
-            class="upload-button"
-            tertiary
-          />
-        </template>
-        <input
-          type="file"
-          ref="fileInput"
-          @change="handleFileChange"
-          style="display: none"
+  <BaseContainer title="Upload de imagem">
+    <div
+      class="upload-container"
+      @dragover.prevent="handleDragOver"
+      @dragleave.prevent="handleDragLeave"
+      @drop.prevent="handleDrop"
+    >
+      <template v-if="media">
+        <div class="image-preview-container">
+          <img :src="media" alt="Uploaded Image" class="thumbnail-image" />
+          <button @click="removeImage" class="remove-image-button">×</button>
+        </div>
+      </template>
+      <template v-else>
+        <img
+          src="@/assets/svgs/cloud-upload.svg"
+          alt="Upload Image Placeholder"
+          class="upload-image"
         />
-      </div>
-    </BaseContainer>
-  </div>
+        <p>Arraste e solte uma imagem aqui ou clique no botão abaixo</p>
+        <BaseButton
+          label="Pesquisar imagens"
+          @click="handleUploadClick"
+          class="upload-button"
+          tertiary
+        />
+      </template>
+      <input
+        type="file"
+        ref="fileInput"
+        @change="handleFileChange"
+        style="display: none"
+      />
+    </div>
+  </BaseContainer>
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import BaseContainer from "@/components/global/BaseContainer.vue";
 import BaseButton from "@/components/global/BaseButton.vue";
 
@@ -50,10 +49,24 @@ export default {
   },
   data() {
     return {
-      imageUrl: null,
+      media: "",
     };
   },
+  computed: {
+    ...mapState({
+      schedule: (state) => state.schedule,
+    }),
+  },
+  watch: {
+    "schedule.media": {
+      handler(newMedia) {
+        this.media = newMedia;
+      },
+      immediate: true,
+    },
+  },
   methods: {
+    ...mapActions(["updateScheduleField"]),
     handleUploadClick() {
       this.$refs.fileInput.click();
     },
@@ -78,7 +91,9 @@ export default {
       if (file && file.type.startsWith("image/")) {
         const reader = new FileReader();
         reader.onload = (e) => {
-          this.imageUrl = e.target.result;
+          const result = e.target.result;
+          this.media = result;
+          this.updateScheduleField({ field: "media", value: result });
         };
         reader.readAsDataURL(file);
       } else {
@@ -86,8 +101,12 @@ export default {
       }
     },
     removeImage() {
-      this.imageUrl = null;
+      this.media = "";
+      this.updateScheduleField({ field: "media", value: "" });
     },
+  },
+  mounted() {
+    this.media = this.schedule.media;
   },
 };
 </script>

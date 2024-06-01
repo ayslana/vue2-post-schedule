@@ -24,12 +24,14 @@ export default {
   },
   computed: {
     containerClass() {
-      return {
-        container: true,
-        "container-full": this.size === "full",
-        "container-half": this.size === "half",
-        "container-quarter": this.size === "quarter",
-      };
+      return [
+        "container",
+        {
+          "container-full": this.size === "full",
+          "container-half": this.size === "half",
+          "container-quarter": this.size === "quarter",
+        },
+      ];
     },
   },
 };

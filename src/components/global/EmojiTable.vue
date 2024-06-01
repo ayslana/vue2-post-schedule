@@ -1,7 +1,7 @@
 <template>
   <div class="emoji-table">
     <div class="emoji-table-content">
-      <div class="emoji-row" v-for="row in emojis" :key="row[0].code">
+      <div class="emoji-row" v-for="(row, rowIndex) in emojis" :key="rowIndex">
         <div
           class="emoji-item"
           v-for="emoji in row"

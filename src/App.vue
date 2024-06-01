@@ -1,15 +1,7 @@
 <template>
   <div id="app">
     <NavBar />
-    <v-main>
-      <router-view
-        style="
-          min-height: calc(100vh - 120px);
-          padding: 120px 36px 0px 36px;
-          background-color: #f8f8f8;
-        "
-      />
-    </v-main>
+    <router-view class="main-view" />
   </div>
 </template>
 
@@ -30,7 +22,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #333333;
+  background-color: #f8f8f8;
+}
+
+.main-view {
+  min-height: calc(100vh - 120px);
+  padding: 120px 36px 0;
   background-color: #f8f8f8;
 }
 </style>

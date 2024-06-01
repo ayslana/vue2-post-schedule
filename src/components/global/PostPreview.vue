@@ -1,26 +1,57 @@
 <template>
-  <div class="post-preview" :class="platformClass">
-    <div class="post-header">
-      <img :src="profileIcon" alt="Profile Icon" class="profile-icon" />
-      <div class="post-user-info">
-        <p>Anselmo Carlos</p>
-        <p v-if="isLinkedin">06 de Setembro</p>
+  <div class="post-preview" :class="{ 'scroll-container': isMultipleNetworks }">
+    <div
+      class="social-post"
+      v-for="(networkKey, index) in schedule.social_network_key"
+      :key="networkKey"
+      :class="getPlatformClass(networkKey)"
+    >
+      <div class="post-header">
+        <div :class="['social-icon-container', getPlatformClass(networkKey)]">
+          <img
+            :src="getIconPath(schedule.icons[index])"
+            class="social-icon"
+            alt="Profile Icon"
+          />
+        </div>
+        <div class="post-user-info">
+          <p class="user-name">Anselmo Carlos</p>
+          <p v-if="isLinkedin(networkKey)" class="post-date">
+            {{ schedule.date }}
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="post-image">
-      <img :src="image" alt="Post Image" />
-    </div>
-    <div class="post-footer">
-      <p>{{ description }}</p>
-      <div v-if="isLinkedin" class="linkedin-actions">
-        <img src="@/assets/svgs/in-like.svg" alt="Like" />
-        <img src="@/assets/svgs/in-comments.svg" alt="Comments" />
-        <img src="@/assets/svgs/in-share.svg" alt="Share" />
-        <span>5 comentários</span>
+      <div class="post-content">
+        <p v-if="isLinkedin(networkKey)" class="post-text">
+          {{ schedule.text }}
+        </p>
+        <div class="post-image">
+          <img :src="schedule.media" alt="Post Image" />
+        </div>
+        <p v-if="isInstagram(networkKey)" class="post-text">
+          {{ schedule.text }}
+        </p>
       </div>
-      <div v-if="isInstagram" class="instagram-actions">
-        <img src="@/assets/svgs/heart.svg" alt="Like" />
-        <img src="@/assets/svgs/comment.svg" alt="Comment" />
+      <div class="post-footer">
+        <div v-if="isLinkedin(networkKey)" class="linkedin-comments">
+          <span class="comments-count">5 comentários</span>
+        </div>
+        <div v-if="isInstagram(networkKey)" class="instagram-actions actions">
+          <div class="insta-main-icons">
+            <img src="@/assets/svgs/heart.svg" alt="Like" />
+            <img src="@/assets/svgs/comment.svg" alt="Comment" />
+          </div>
+          <img
+            src="@/assets/svgs/bookmark.svg"
+            alt="Bookmark"
+            class="bookmark"
+          />
+        </div>
+        <div v-if="isLinkedin(networkKey)" class="linkedin-actions actions">
+          <img src="@/assets/svgs/in-like.svg" alt="Like" />
+          <img src="@/assets/svgs/in-comments.svg" alt="Comments" />
+          <img src="@/assets/svgs/in-share.svg" alt="Share" />
+        </div>
       </div>
     </div>
   </div>
@@ -28,34 +59,30 @@
 
 <script>
 export default {
+  name: "PostPreview",
   props: {
-    platform: {
-      type: String,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
+    schedule: {
+      type: Object,
       required: true,
     },
   },
   computed: {
-    isLinkedin() {
-      return this.platform === "Linkedin";
+    isMultipleNetworks() {
+      return this.schedule.social_network_key.length > 1;
     },
-    isInstagram() {
-      return this.platform === "Instagram";
+  },
+  methods: {
+    isLinkedin(networkKey) {
+      return networkKey === 1;
     },
-    platformClass() {
-      return this.isLinkedin ? "linkedin" : "instagram";
+    isInstagram(networkKey) {
+      return networkKey === 2;
     },
-    profileIcon() {
-      return this.isLinkedin
-        ? "@/assets/svgs/linkedin.svg"
-        : "@/assets/svgs/instagram.svg";
+    getPlatformClass(networkKey) {
+      return this.isLinkedin(networkKey) ? "linkedin" : "instagram";
+    },
+    getIconPath(icon) {
+      return require(`@/assets/svgs/${icon}`);
     },
   },
 };
@@ -63,42 +90,130 @@ export default {
 
 <style scoped>
 .post-preview {
-  border: 1px solid #e1e1e1;
   border-radius: 8px;
   overflow: hidden;
   margin: 16px;
+  display: flex;
+  flex-direction: row;
+  background: #fff;
 }
+
+.scroll-container {
+  overflow-x: auto;
+}
+
+.social-post {
+  flex: 0 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-right: 16px;
+  max-width: 345px;
+}
+
 .post-header {
   display: flex;
   align-items: center;
   padding: 8px;
+  border-bottom: 1px solid #e1e1e1;
 }
-.profile-icon {
+
+.social-icon-container {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.linkedin .social-icon-container {
+  background: #3a70da;
+}
+
+.instagram .social-icon-container {
+  background: linear-gradient(187.5deg, #ef2ea2 5.81%, #e0a22b 109.34%);
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.3s;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(93deg)
+    brightness(107%) contrast(101%);
+}
+
 .post-user-info {
   margin-left: 8px;
 }
-.post-image img {
-  width: 100%;
-  height: auto;
+
+.user-name {
+  font-weight: bold;
+  margin: 0;
 }
-.post-footer {
+
+.post-date {
+  margin: 0;
+  color: #777;
+  font-size: 12px;
+}
+
+.post-content {
   padding: 8px;
 }
-.linkedin .linkedin-actions {
+
+.post-image img {
+  width: 100%;
+  max-width: 348px;
+  max-height: 348px;
+  object-fit: cover;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.post-footer {
+  padding: 0px 8px 4px 8px;
+}
+
+.post-text {
+  margin: 0 0 8px 0;
+  text-align: left;
+}
+
+.actions {
   display: flex;
   align-items: center;
+}
+
+.instagram-actions {
   justify-content: space-between;
 }
-.instagram .instagram-actions {
+
+.insta-main-icons {
   display: flex;
-  align-items: center;
 }
-.linkedin-actions img,
-.instagram-actions img {
+
+.insta-main-icons img {
   margin-right: 8px;
+}
+
+.bookmark {
+  margin-left: auto;
+}
+
+.linkedin-comments {
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.linkedin-actions {
+  justify-content: flex-start;
+}
+
+.linkedin-actions img {
+  margin-right: 8px;
+}
+
+.comments-count {
+  font-size: 12px;
+  color: #777;
 }
 </style>
