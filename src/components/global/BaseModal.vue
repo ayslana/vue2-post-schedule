@@ -6,6 +6,12 @@
           <h3>{{ label }}</h3>
         </div>
         <div class="modal-footer">
+          <BaseButton
+            v-if="showCancel"
+            @click="handleCancelClick"
+            label="Cancelar"
+            tertiary
+          ></BaseButton>
           <BaseButton @click="handleOkClick" label="OK" secondary></BaseButton>
         </div>
       </div>
@@ -30,6 +36,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    showCancel: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     closeModal() {
@@ -37,6 +47,9 @@ export default {
     },
     handleOkClick() {
       this.$emit("handleConfirmation");
+      this.closeModal();
+    },
+    handleCancelClick() {
       this.closeModal();
     },
   },
@@ -66,6 +79,8 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .label-container {
@@ -76,5 +91,6 @@ export default {
 .modal-footer {
   display: flex;
   justify-content: center;
+  gap: 10px;
 }
 </style>
