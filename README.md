@@ -64,7 +64,6 @@ O aplicativo estará disponível em [http://localhost:8080](http://localhost:808
 Alguns requisitos não foram atendidos devido à minha limitada disponibilidade de tempo. No entanto, pretendo abordá-los em um futuro próximo.
 
 - Melhorar a organização do CSS para futuras manutenções.
-- Implementar a persistência da imagem escolhida e a conversão de base64 através de uma classe de serviço.
 - Ajustes na acessibilidade do app.
 - Implementar um modal de preview na listagem de agendamentos.
 - Cobertura de mais de 50% da aplicação com testes unitários.
