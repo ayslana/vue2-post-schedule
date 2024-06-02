@@ -95,11 +95,6 @@ export default {
       this.$router.push({ name: "Home" });
     },
   },
-  beforeDestroy() {
-    if (!this.persistSchedule) {
-      this.clearSchedule();
-    }
-  },
 };
 </script>
 
