@@ -3,14 +3,21 @@
     <table class="responsive-table">
       <thead>
         <tr>
-          <th v-for="(title, index) in tableHeaders" :key="index">
+          <th
+            v-for="(title, index) in tableHeaders"
+            :key="index"
+            @click="sortBy(index)"
+          >
             {{ title }}
+            <span v-if="sortedColumn === index">
+              {{ sortOrder === "asc" ? "↑" : "↓" }}
+            </span>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr
-          v-for="(item, index) in schedules"
+          v-for="(item, index) in sortedSchedules"
           :key="index"
           :class="{ 'alternate-row': index % 2 !== 0 }"
         >
@@ -56,6 +63,8 @@ export default {
         "Ações",
         "Status",
       ],
+      sortedColumn: null,
+      sortOrder: "asc",
     };
   },
   computed: {
@@ -63,8 +72,40 @@ export default {
     schedules() {
       return this.getSchedules;
     },
+    sortedSchedules() {
+      if (this.sortedColumn === null) return this.schedules;
+
+      return [...this.schedules].sort((a, b) => {
+        let result = 0;
+        if (this.sortedColumn === 3) {
+          const [dateA, timeA] = a.date.split(" às ");
+          const [dayA, monthA, yearA] = dateA.split("/").map(Number);
+          const [hoursA, minutesA] = timeA.split(":").map(Number);
+          const dateTimeA = new Date(yearA, monthA - 1, dayA, hoursA, minutesA);
+
+          const [dateB, timeB] = b.date.split(" às ");
+          const [dayB, monthB, yearB] = dateB.split("/").map(Number);
+          const [hoursB, minutesB] = timeB.split(":").map(Number);
+          const dateTimeB = new Date(yearB, monthB - 1, dayB, hoursB, minutesB);
+
+          result = dateTimeA - dateTimeB;
+        } else if (this.sortedColumn === 5) {
+          result = a.name.localeCompare(b.name);
+        }
+
+        return this.sortOrder === "asc" ? result : -result;
+      });
+    },
   },
   methods: {
+    sortBy(index) {
+      if (this.sortedColumn === index) {
+        this.sortOrder = this.sortOrder === "asc" ? "desc" : "asc";
+      } else {
+        this.sortedColumn = index;
+        this.sortOrder = "asc";
+      }
+    },
     getIconClass(icon) {
       if (icon.includes("instagram")) {
         return "instagram-icon";
@@ -107,6 +148,10 @@ export default {
 .responsive-table th {
   background-color: #fff;
   color: black;
+}
+
+.responsive-table th:hover {
+  cursor: pointer;
 }
 
 .icon-container {
