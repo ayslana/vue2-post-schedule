@@ -111,7 +111,6 @@ export default new Vuex.Store({
         const newSchedule = {
           ...state.schedule,
           id: newId,
-          media: "post-image.png",
         };
 
         commit("addSchedule", newSchedule);
