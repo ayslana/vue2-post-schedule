@@ -19,7 +19,7 @@ Este projeto é uma aplicação frontend que simula o agendamento de posts em re
 
 ## Estrutura de Pastas
 
-- **assets**: Inclui arquivos de estilização CSS, além de icons e imagens usados no projeto.
+- **assets**: Inclui icons e imagens usados no projeto.
 - **components**: Contém os componentes criados para cada seção, além de componentes reutilizáveis.
 - **views**: Contém as páginas da aplicação, que são roteadas pelo Vue Router.
 - **public**: Contém arquivos estáticos que são servidos diretamente, como os .json fornecidos.
@@ -31,24 +31,31 @@ Este projeto é uma aplicação frontend que simula o agendamento de posts em re
 
    ```bash
    git clone https://github.com/ayslana/vue2-post-schedule
-   
+
+   ```
+
 2. Navegue até o diretório do projeto:
 
    ```bash
    cd vue2-post-schedule
 
+   ```
+
 3. Instale as dependências com npm:
 
    ```bash
    npm install
-   
+
+   ```
+
 ## Executando o Projeto
 
 Para iniciar o projeto, utilize o seguinte comando:
 
-  ```bash
-  npm run serve
-  ```
+```bash
+npm run serve
+
+```
 
 O aplicativo estará disponível em [http://localhost:8080](http://localhost:8080).
 
@@ -57,7 +64,7 @@ O aplicativo estará disponível em [http://localhost:8080](http://localhost:808
 - Vue persist para persistir os dados da store do Vuex no local storage.
 - Axios para consumir os dados.
 - Na store, foi optaado por não separar de forma modular, visto que a aplicação em si só se tratava de um único módulo: agendamento.
-- Os estilos foram definidos diretamente dentro dos componentes, utilizando o scoped. 
+- Os estilos foram definidos diretamente dentro dos componentes, utilizando o scoped.
 
 ## Pontos de Melhorias
 
@@ -68,6 +75,10 @@ Alguns requisitos não foram atendidos devido à minha limitada disponibilidade 
 - Implementar um modal de preview na listagem de agendamentos.
 - Cobertura de mais de 50% da aplicação com testes unitários.
 
+## Dificuldades
+
+Uma das principais dificuldades encontradas foi a adaptação ao Vue 2 e Vuex. Tendo trabalhado ultimamente com Vue 3 e TypeScript em outros projetos, foi desafiador lidar com as particularidades e limitações do Vue 2, além de relembrar a forma de utilização do Vuex. Adicionalmente, foi necessário desenvolver algumas funcionalidades do zero, o que demandou um esforço significativo para implementar aspectos essenciais, como a responsividade (grid).
+
 ## Testes Unitários
 
 Foram realizados testes unitários em alguns componentes do sistema. Para rodar os testes, execute o comando abaixo no terminal:
@@ -75,7 +86,4 @@ Foram realizados testes unitários em alguns componentes do sistema. Para rodar 
 ```bash
 npm run test:unit
 
-
-
-
-
+```
