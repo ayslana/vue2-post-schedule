@@ -24,7 +24,7 @@
             </div>
           </td>
           <td>
-            <img :src="getMediaPath(item.media)" class="media" />
+            <img v-bind:src="getMediaPath(item.id, item.media)" class="media" />
           </td>
           <td>{{ item.text }}</td>
           <td>{{ item.date }}</td>
@@ -76,8 +76,9 @@ export default {
     getIconPath(icon) {
       return require(`@/assets/svgs/${icon}`);
     },
-    getMediaPath(media) {
-      return require(`@/assets/images/${media}`);
+    getMediaPath(id, media) {
+      const baseIds = [1, 2];
+      return baseIds.includes(id) ? require(`@/assets/images/${media}`) : media;
     },
   },
 };
