@@ -8,6 +8,7 @@
       @close="closeModal"
       :label="label"
       @handleConfirmation="handleConfirmation"
+      :showCancel="showCancel"
     />
   </div>
 </template>
@@ -26,6 +27,7 @@ export default {
   data() {
     return {
       showModal: false,
+      showCancel: false,
       label: "",
       pendingAction: null,
       persistSchedule: false,
@@ -46,7 +48,8 @@ export default {
     confirmCancel() {
       this.setModal(
         "Você tem certeza que deseja cancelar o agendamento? Todas as suas informações serão perdidas.",
-        this.handleCancel
+        this.handleCancel,
+        true
       );
     },
     confirmSaveDraft() {
@@ -71,9 +74,10 @@ export default {
         );
       }
     },
-    setModal(label, action = null) {
+    setModal(label, action = null, showCancel = false) {
       this.label = label;
       this.pendingAction = action;
+      this.showCancel = showCancel;
       this.showModal = true;
     },
     closeModal() {
