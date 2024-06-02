@@ -15,7 +15,7 @@
         <PostPreviewContainer />
       </div>
     </div>
-    <ScheduleFooter />
+    <ScheduleFooter ref="scheduleFooter" />
   </div>
 </template>
 
@@ -36,6 +36,13 @@ export default {
     PublicationDateContainer,
     SocialMediaContainer,
     ScheduleFooter,
+  },
+  beforeRouteLeave(to, from, next) {
+    const scheduleFooter = this.$refs.scheduleFooter;
+    if (scheduleFooter && !scheduleFooter.persistSchedule) {
+      scheduleFooter.clearSchedule();
+    }
+    next();
   },
 };
 </script>
