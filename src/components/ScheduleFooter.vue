@@ -30,14 +30,13 @@ export default {
       showCancel: false,
       label: "",
       pendingAction: null,
-      persistSchedule: false,
     };
   },
   computed: {
-    ...mapState(["schedule"]),
+    ...mapState(["schedule", "persistedSchedule"]),
   },
   methods: {
-    ...mapActions(["clearSchedule", "addSchedule"]),
+    ...mapActions(["clearSchedule", "addSchedule", "persistSchedule"]),
     handleConfirmation() {
       if (this.pendingAction) {
         this.pendingAction();
@@ -53,20 +52,18 @@ export default {
       );
     },
     confirmSaveDraft() {
-      const { text, icons, time, date, media } = this.schedule;
-      if (text || icons.length || time || date || media) {
+      if (this.isScheduleNotEmpty()) {
         this.setModal("Rascunho salvo com sucesso!", this.handleSaveDraft);
-        this.persistSchedule = true;
+        this.persistSchedule(true);
       } else {
         this.setModal(
           "Por favor, preencha pelo menos um campo antes de salvar o rascunho."
         );
-        this.persistSchedule = false;
+        this.persistSchedule(false);
       }
     },
     confirmSchedule() {
-      const { text, icons, time, date, media } = this.schedule;
-      if (text && icons.length && time && date && media) {
+      if (this.isScheduleComplete()) {
         this.setModal("Agendamento feito com sucesso!", this.handleSchedule);
       } else {
         this.setModal(
@@ -85,15 +82,31 @@ export default {
     },
     handleCancel() {
       this.clearSchedule();
+      this.persistSchedule(false);
       this.$router.push({ name: "Home" });
     },
     handleSchedule() {
       this.addSchedule();
+      this.persistSchedule(false);
       this.$router.push({ name: "Listagem de Agendamento" });
     },
     handleSaveDraft() {
       this.$router.push({ name: "Home" });
     },
+    isScheduleNotEmpty() {
+      const { text, icons, time, date, media } = this.schedule;
+      return text || icons.length || time || date || media;
+    },
+    isScheduleComplete() {
+      const { text, icons, time, date, media } = this.schedule;
+      return text && icons.length && time && date && media;
+    },
+  },
+  beforeMount() {
+    if (!this.persistedSchedule) {
+      this.clearSchedule();
+    }
+    this.persistSchedule(false);
   },
 };
 </script>
