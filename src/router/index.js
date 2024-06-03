@@ -1,5 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import HomeView from "@/views/HomeView.vue";
+import ScheduleView from "@/views/ScheduleView.vue";
+import ScheduleListView from "@/views/ScheduleListView.vue";
 
 Vue.use(VueRouter);
 
@@ -7,17 +10,17 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/HomeView.vue"),
+    component: HomeView,
   },
   {
     path: "/agendamento",
     name: "Agendamento",
-    component: () => import("../views/ScheduleView.vue"),
+    component: ScheduleView,
   },
   {
     path: "/listagem-agendamento",
     name: "Listagem de Agendamento",
-    component: () => import("../views/ScheduleListView.vue"),
+    component: ScheduleListView,
   },
   {
     path: "*",
