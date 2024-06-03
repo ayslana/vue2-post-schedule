@@ -110,4 +110,37 @@ export default {
   text-decoration: underline;
   background-color: transparent;
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+  .base-btn {
+    font-size: 14px;
+    min-width: 160px;
+    max-height: 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  .base-btn {
+    font-size: 12px;
+    min-width: 140px;
+    max-height: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .base-btn {
+    font-size: 10px;
+    min-width: 120px;
+    max-height: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .base-btn {
+    font-size: 8px;
+    min-width: 100px;
+    max-height: 25px;
+  }
+}
 </style>
