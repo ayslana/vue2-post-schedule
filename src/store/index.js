@@ -29,6 +29,7 @@ export default new Vuex.Store({
     socialNetworks: [],
     schedule: { ...initialState },
     schedulesLoaded: false,
+    persistedSchedule: false,
   },
   getters: {
     getSchedules: (state) => state.schedules,
@@ -61,6 +62,9 @@ export default new Vuex.Store({
     },
     setSchedulesLoaded(state, loaded) {
       state.schedulesLoaded = loaded;
+    },
+    setPersistedSchedule(state, persisted) {
+      state.persistedSchedule = persisted;
     },
   },
   actions: {
@@ -127,6 +131,9 @@ export default new Vuex.Store({
     },
     clearSchedule({ commit }) {
       commit("clearSchedule");
+    },
+    persistSchedule({ commit }, persisted) {
+      commit("setPersistedSchedule", persisted);
     },
   },
   plugins: [vuexLocal.plugin],
