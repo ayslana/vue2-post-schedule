@@ -26,6 +26,7 @@ import PostPreviewContainer from "@/components/PostPreviewContainer.vue";
 import PublicationDateContainer from "@/components/PublicationDateContainer.vue";
 import ScheduleFooter from "@/components/ScheduleFooter.vue";
 import SocialMediaContainer from "@/components/SocialMediaContainer.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "ScheduleView",
@@ -37,10 +38,13 @@ export default {
     SocialMediaContainer,
     ScheduleFooter,
   },
+  methods: {
+    ...mapActions(["clearSchedule", "addSchedule"]),
+  },
   beforeRouteLeave(to, from, next) {
     const scheduleFooter = this.$refs.scheduleFooter;
     if (scheduleFooter && !scheduleFooter.persistSchedule) {
-      scheduleFooter.clearSchedule();
+      this.clearSchedule();
     }
     next();
   },
